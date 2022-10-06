@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dao", "Dao\Dao.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{98B29C80-30F2-4D15-884F-C2D2E90E1EB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "model", "modelf\model.csproj", "{0AE4C0DE-E778-4CD0-BCDC-CD0098AEE714}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "models", "models\models.csproj", "{72948E67-E796-463C-AD60-FFA3DD94DA3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{98B29C80-30F2-4D15-884F-C2D2E90E1EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98B29C80-30F2-4D15-884F-C2D2E90E1EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98B29C80-30F2-4D15-884F-C2D2E90E1EB6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0AE4C0DE-E778-4CD0-BCDC-CD0098AEE714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AE4C0DE-E778-4CD0-BCDC-CD0098AEE714}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AE4C0DE-E778-4CD0-BCDC-CD0098AEE714}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AE4C0DE-E778-4CD0-BCDC-CD0098AEE714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72948E67-E796-463C-AD60-FFA3DD94DA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72948E67-E796-463C-AD60-FFA3DD94DA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72948E67-E796-463C-AD60-FFA3DD94DA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72948E67-E796-463C-AD60-FFA3DD94DA3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

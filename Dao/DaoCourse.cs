@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using Model;
+using Utdl.Model;
 
 namespace Utdl.Dao {
     public class DaoCourse {

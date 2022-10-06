@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utdl.Dao;
+using Utdl.Model;
 
 namespace Utdl.View {
     public partial class FcourseLapins:Form {
@@ -16,22 +18,46 @@ namespace Utdl.View {
             btnEdit.Click += this.btnEdit_Click;
             btnDelete.Click += this.btnDelete_Click;
             btnSave.Click += this.btnSave_Click;
+            this.load(new DaoLapin().GetAll(0));
         }
 
         private void btnSave_Click(object sender,System.EventArgs e) {
-            throw new System.NotImplementedException();
+            List<Lapin> lapins = new List<Lapin>();
+            foreach (object o in lbLesLapins.Items)
+            {
+                lapins.Add((Lapin)o);
+            }
+            new DaoLapin().SaveChanges(lapins);
+            this.load(lapins);
         }
 
         private void btnDelete_Click(object sender,System.EventArgs e) {
-            throw new System.NotImplementedException();
+            if (lbLesLapins.SelectedIndex == -1)
+                return;
+            int position = lbLesLapins.SelectedIndex;
+            ((Lapin)lbLesLapins.Items[position]).Remove();
+            lbLesLapins.Items[position] = lbLesLapins.Items[position];
         }
 
         private void btnEdit_Click(object sender,System.EventArgs e) {
-            throw new System.NotImplementedException();
+            if (lbLesLapins.SelectedIndex == -1)
+                return;
+            int position = lbLesLapins.SelectedIndex;
+            FeditCourse fedit = new FeditCourse(State.modified, lbLesLapins.Items, position);
+            fedit.Show();
         }
 
         private void btnAdd_Click(object sender,System.EventArgs e) {
-            this.lbLesLapins.Items.Add();
+            FeditLapin fedit = new FeditLapin(State.added,lbLesLapins.Items,0);
+            fedit.Show();
+        }
+        private void load(List<Lapin> lapins)
+        {
+            lbLesLapins.Items.Clear();
+            foreach (Lapin l in lapins)
+            {
+                lbLesLapins.Items.Add(l);
+            }
         }
     }
 }

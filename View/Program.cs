@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
-using Utdl.Dao;
 
 namespace Utdl.View {
     static class Program {

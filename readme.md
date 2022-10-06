@@ -249,7 +249,3 @@ Vous avez peut être remarqué que lorsque l'on crée une nouvelle course ou un 
 Proposez une évolution permettant de résoudre ce petit problème.
 
 indice 1 : l'évolution est liée à une propriété du SqlCommand (LastInsertId) que l'on peut utiliser lors que l'on effectue un Insert.
-
-Enstso Janvier
-
-enstso@outlook.fr
