@@ -15,16 +15,22 @@ namespace Utdl.View {
             InitializeComponent();
             this.btnLesCourses.Click += this.btnLesCourses_Click;
             this.btnUneCourse.Click += this.btnUneCourse_Click;
-            DaoConnectionSingleton.SetStringConnection("root","siojjr","localhost","dbUtdl");
+            DaoConnectionSingleton.SetStringConnection("root","","localhost","dbUtdl");
         }
 
         private void btnUneCourse_Click(object sender,EventArgs e) {
-            throw new NotImplementedException();
+            FcourseLapins fCourseLapin = new FcourseLapins();
+            fCourseLapin.Show();
         }
 
         private void btnLesCourses_Click(object sender,EventArgs e) {
             FlesCourses fLesCourses = new FlesCourses();
             fLesCourses.Show();
+        }
+
+        private void FultraTrail_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

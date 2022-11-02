@@ -34,69 +34,77 @@
             // cbCourse
             // 
             this.cbCourse.FormattingEnabled = true;
-            this.cbCourse.Location = new System.Drawing.Point(13, 13);
+            this.cbCourse.Location = new System.Drawing.Point(7, 7);
+            this.cbCourse.Margin = new System.Windows.Forms.Padding(2);
             this.cbCourse.Name = "cbCourse";
-            this.cbCourse.Size = new System.Drawing.Size(121, 32);
+            this.cbCourse.Size = new System.Drawing.Size(68, 21);
             this.cbCourse.TabIndex = 0;
+            this.cbCourse.SelectedIndexChanged += new System.EventHandler(this.cbCourse_SelectedIndexChanged);
             // 
             // lbLesLapins
             // 
             this.lbLesLapins.FormattingEnabled = true;
-            this.lbLesLapins.ItemHeight = 24;
-            this.lbLesLapins.Location = new System.Drawing.Point(13, 62);
+            this.lbLesLapins.Location = new System.Drawing.Point(7, 34);
+            this.lbLesLapins.Margin = new System.Windows.Forms.Padding(2);
             this.lbLesLapins.Name = "lbLesLapins";
-            this.lbLesLapins.Size = new System.Drawing.Size(425, 268);
+            this.lbLesLapins.Size = new System.Drawing.Size(234, 147);
             this.lbLesLapins.TabIndex = 1;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(340, 336);
+            this.btnSave.Location = new System.Drawing.Point(185, 182);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(98, 47);
+            this.btnSave.Size = new System.Drawing.Size(53, 25);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(231, 336);
+            this.btnDelete.Location = new System.Drawing.Point(126, 182);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(98, 47);
+            this.btnDelete.Size = new System.Drawing.Size(53, 25);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(122, 336);
+            this.btnEdit.Location = new System.Drawing.Point(67, 182);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(98, 47);
+            this.btnEdit.Size = new System.Drawing.Size(53, 25);
             this.btnEdit.TabIndex = 6;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(13, 336);
+            this.btnAdd.Location = new System.Drawing.Point(7, 182);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(98, 47);
+            this.btnAdd.Size = new System.Drawing.Size(53, 25);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // FcourseLapins
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 407);
+            this.ClientSize = new System.Drawing.Size(252, 220);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lbLesLapins);
             this.Controls.Add(this.cbCourse);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FcourseLapins";
             this.Text = "FcourseLapins";
+            this.Load += new System.EventHandler(this.FcourseLapins_Load);
             this.ResumeLayout(false);
 
         }

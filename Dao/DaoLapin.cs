@@ -5,7 +5,10 @@ using Utdl.Model;
 
 namespace Utdl.Dao {
     public class DaoLapin {
+       
+        
         public void SaveChanges(List<Lapin> lapins) {
+
             for(int i=0;i<lapins.Count; i++) {
                 Lapin lapin = lapins[i];
                 switch(lapin.State) {
@@ -35,6 +38,7 @@ namespace Utdl.Dao {
         }
 
         private void update(Lapin lapin) {
+            
             using(MySqlConnection cnx = DaoConnectionSingleton.GetMySqlConnection()) {
                 cnx.Open();
                 using(MySqlCommand cmd = new MySqlCommand("update Lapin set surnom=@surnom,age=@age,position=@position,dossard=@dossard idCourse=@idCourse where id=@id",cnx)) {
@@ -43,11 +47,14 @@ namespace Utdl.Dao {
                     cmd.Parameters.Add(new MySqlParameter("@position",MySqlDbType.Int32));
                     cmd.Parameters.Add(new MySqlParameter("@dossard",MySqlDbType.Int32));
                     cmd.Parameters.Add(new MySqlParameter("@surnom",MySqlDbType.VarChar));
+                    cmd.Parameters.Add(new MySqlParameter("@idCourse", MySqlDbType.Int32));
                     cmd.Parameters["@id"].Value = lapin.Id;
                     cmd.Parameters["@age"].Value = lapin.Age;
                     cmd.Parameters["@position"].Value = lapin.Position;
                     cmd.Parameters["@dossard"].Value = lapin.Dossard;
                     cmd.Parameters["@surnom"].Value = lapin.Surnom;
+                    
+
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -55,6 +62,7 @@ namespace Utdl.Dao {
         }
 
         private void insert(Lapin lapin) {
+           
             using(MySqlConnection cnx = DaoConnectionSingleton.GetMySqlConnection()) {
                 cnx.Open();
                 using(MySqlCommand cmd = new MySqlCommand("insert into Lapin(surnom,age,position,dossard,idCourse) values(@surnom,@age,@position,@dossard,@idCourse)",cnx)) {
@@ -63,7 +71,6 @@ namespace Utdl.Dao {
                     cmd.Parameters.Add(new MySqlParameter("@position",MySqlDbType.Int32));
                     cmd.Parameters.Add(new MySqlParameter("@dossard",MySqlDbType.Int32));
                     cmd.Parameters.Add(new MySqlParameter("@surnom",MySqlDbType.VarChar));
-                    cmd.Parameters["@id"].Value = lapin.Id;
                     cmd.Parameters["@age"].Value = lapin.Age;
                     cmd.Parameters["@position"].Value = lapin.Position;
                     cmd.Parameters["@dossard"].Value = lapin.Dossard;
@@ -80,6 +87,7 @@ namespace Utdl.Dao {
             using(MySqlConnection cnx = DaoConnectionSingleton.GetMySqlConnection()) {
                 cnx.Open();
                 using(MySqlCommand cmd = new MySqlCommand("select id,surnom,age,position,dossard from Lapin where idCourse=@idCourse",cnx)) {
+                    cmd.Parameters.Add(new MySqlParameter("@idCourse", idCourse));
                     using(MySqlDataReader rdr = cmd.ExecuteReader()) {
                         while(rdr.Read()) {
                             lapins.Add(new Lapin(Convert.ToInt32(rdr["id"]),rdr["surnom"].ToString(),Convert.ToInt32(rdr["age"]),Convert.ToInt32(rdr["dossard"]),Convert.ToInt32(rdr["position"]),State.unChanged));

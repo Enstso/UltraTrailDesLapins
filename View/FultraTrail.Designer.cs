@@ -29,31 +29,35 @@
             // 
             // btnLesCourses
             // 
-            this.btnLesCourses.Location = new System.Drawing.Point(140, 14);
+            this.btnLesCourses.Location = new System.Drawing.Point(76, 8);
+            this.btnLesCourses.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLesCourses.Name = "btnLesCourses";
-            this.btnLesCourses.Size = new System.Drawing.Size(249, 50);
+            this.btnLesCourses.Size = new System.Drawing.Size(136, 27);
             this.btnLesCourses.TabIndex = 0;
             this.btnLesCourses.Text = "LesCourses";
             this.btnLesCourses.UseVisualStyleBackColor = true;
             // 
             // btnUneCourse
             // 
-            this.btnUneCourse.Location = new System.Drawing.Point(140, 86);
+            this.btnUneCourse.Location = new System.Drawing.Point(76, 47);
+            this.btnUneCourse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnUneCourse.Name = "btnUneCourse";
-            this.btnUneCourse.Size = new System.Drawing.Size(249, 50);
+            this.btnUneCourse.Size = new System.Drawing.Size(136, 27);
             this.btnUneCourse.TabIndex = 1;
             this.btnUneCourse.Text = "Une Course";
             this.btnUneCourse.UseVisualStyleBackColor = true;
             // 
             // FultraTrail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 151);
+            this.ClientSize = new System.Drawing.Size(289, 82);
             this.Controls.Add(this.btnUneCourse);
             this.Controls.Add(this.btnLesCourses);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FultraTrail";
             this.Text = "Ultra Trail des lapins";
+            this.Load += new System.EventHandler(this.FultraTrail_Load);
             this.ResumeLayout(false);
 
         }

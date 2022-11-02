@@ -10,18 +10,29 @@ using System.Windows.Forms;
 using Utdl.Dao;
 using Utdl.Model;
 
-namespace Utdl.View {
-    public partial class FcourseLapins:Form {
-        public FcourseLapins() {
+namespace Utdl.View
+{
+    public partial class FcourseLapins : Form
+    {
+
+        public FcourseLapins()
+        {
             InitializeComponent();
             btnAdd.Click += this.btnAdd_Click;
             btnEdit.Click += this.btnEdit_Click;
             btnDelete.Click += this.btnDelete_Click;
             btnSave.Click += this.btnSave_Click;
-            this.load(new DaoLapin().GetAll(0));
+            DaoCourse course = new DaoCourse();
+            List<Course> courses = course.GetAll();
+            cbCourse.DataSource = courses;
+            cbCourse.ValueMember = "id";
+            cbCourse.DisplayMember = "id";
+            this.load(new DaoLapin().GetAll(cbCourse.SelectedIndex));
         }
 
-        private void btnSave_Click(object sender,System.EventArgs e) {
+        private void btnSave_Click(object sender, System.EventArgs e)   
+        {
+            
             List<Lapin> lapins = new List<Lapin>();
             foreach (object o in lbLesLapins.Items)
             {
@@ -31,7 +42,8 @@ namespace Utdl.View {
             this.load(lapins);
         }
 
-        private void btnDelete_Click(object sender,System.EventArgs e) {
+        private void btnDelete_Click(object sender, System.EventArgs e)
+        {
             if (lbLesLapins.SelectedIndex == -1)
                 return;
             int position = lbLesLapins.SelectedIndex;
@@ -39,16 +51,18 @@ namespace Utdl.View {
             lbLesLapins.Items[position] = lbLesLapins.Items[position];
         }
 
-        private void btnEdit_Click(object sender,System.EventArgs e) {
+        private void btnEdit_Click(object sender, System.EventArgs e)
+        {
             if (lbLesLapins.SelectedIndex == -1)
                 return;
             int position = lbLesLapins.SelectedIndex;
-            FeditCourse fedit = new FeditCourse(State.modified, lbLesLapins.Items, position);
+            FeditLapin fedit = new FeditLapin(State.modified, lbLesLapins.Items, position);
             fedit.Show();
         }
 
-        private void btnAdd_Click(object sender,System.EventArgs e) {
-            FeditLapin fedit = new FeditLapin(State.added,lbLesLapins.Items,0);
+        private void btnAdd_Click(object sender, System.EventArgs e)
+        {
+            FeditLapin fedit = new FeditLapin(State.added, lbLesLapins.Items, 0);
             fedit.Show();
         }
         private void load(List<Lapin> lapins)
@@ -58,6 +72,18 @@ namespace Utdl.View {
             {
                 lbLesLapins.Items.Add(l);
             }
+        }
+
+        private void FcourseLapins_Load(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            
         }
     }
 }

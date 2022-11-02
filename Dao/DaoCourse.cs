@@ -23,6 +23,8 @@ namespace Utdl.Dao {
             }
         }
 
+        
+
         private void delete(Course course) {
             using(MySqlConnection cnx = DaoConnectionSingleton.GetMySqlConnection()) {
                 cnx.Open();
@@ -32,6 +34,7 @@ namespace Utdl.Dao {
                     cmd.ExecuteNonQuery();
                 }
             }
+
         }
 
         private void update(Course course) {

@@ -35,7 +35,7 @@ namespace Utdl.View {
         private void BtnValider_Click(object sender,EventArgs e) {
             switch(this.state) {
                 case State.added:
-                    items.Add(new Course(0,Convert.ToInt32(this.tbDistance.Text),this.state));
+                    items.Add(new Course(Convert.ToInt32(this.tbDistance.Text),this.state));
                     break;
                 case State.modified:
                     Course course = (Course)items[this.position];
@@ -52,6 +52,9 @@ namespace Utdl.View {
             this.Close();
         }
 
-       
+        private void FeditCourse_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

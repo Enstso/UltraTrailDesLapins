@@ -45,15 +45,14 @@ namespace Utdl.View {
             switch (this.state)
             {
                 case State.added:
-                    items.Add(new Lapin(Convert.ToInt32(tbId.Text), tbSurnom.Text, Convert.ToInt32(tbAge.Text), Convert.ToInt32(tbDossard.Text), Convert.ToInt32(tbPosition.Text), this.state));
+                    items.Add(new Lapin(tbSurnom.Text, Convert.ToInt32(tbAge.Text), this.state));
                     break;
                 case State.modified:
                     Lapin lapin = (Lapin)items[this.position];
-                    lapin.Id = Convert.ToInt32(this.tbId.Text);
+                    
                     lapin.Surnom = this.tbSurnom.Text;
                     lapin.Age = Convert.ToInt32(this.tbAge.Text);
-                    lapin.Dossard = Convert.ToInt32(this.tbDossard.Text);
-                    lapin.Position = Convert.ToInt32(this.tbPosition.Text);
+                    
                     break;
                 case State.deleted:
                     break;
@@ -63,6 +62,11 @@ namespace Utdl.View {
                     break;
 
             }
+        }
+
+        private void FeditLapin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

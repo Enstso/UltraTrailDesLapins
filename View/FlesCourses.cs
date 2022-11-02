@@ -53,5 +53,10 @@ namespace Utdl.View {
                 lbCourses.Items.Add(c);
             }
         }
+
+        private void FlesCourses_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

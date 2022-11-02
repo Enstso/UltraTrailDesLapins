@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Utdl.Model {
         public class Course {
@@ -28,6 +29,15 @@ namespace Utdl.Model {
             this.id=id;
             this.distance=distance;
             this.state=state;
+            this.participer = new List<Lapin>();
+        }
+
+       
+        public Course( int distance, State state)
+        {
+            this.participer = new List<Lapin>();
+            this.distance = distance;
+            this.state = state;
         }
         public Course(int distance) {
             this.distance=distance;
@@ -39,8 +49,25 @@ namespace Utdl.Model {
             this.participer.Add(nouveauParticipant);
         }
 
-        public void AttribuerDosssard()
+        public void Attribuer()
         {
+            List<int> dossard = new List<int>();
+            Random aleatoire = new Random();
+
+            for (int i = 0; i < this.participer.Count; i++)
+            {
+                dossard.Add(i);
+            }
+            int choix = 0;
+
+            foreach (Lapin lapin in this.participer)
+            {
+                choix = aleatoire.Next(0, dossard.Count);
+                lapin.Dossard = dossard[choix];
+                dossard.RemoveAt(choix);
+            }
+
+
 
         }
 
@@ -73,11 +100,11 @@ namespace Utdl.Model {
 
         public State State {
             get {
-                return this.State;
+                return this.state;
             }
 
             set {
-                this.State = value;
+                this.state = value;
             }
         }
 
@@ -103,34 +130,53 @@ namespace Utdl.Model {
         public List<Lapin> Podium()
         {
             List<Lapin> podium = new List<Lapin>();
-            foreach(Lapin l in this.participer)
+            Lapin prems = this.participer[0];
+            Lapin deums = this.participer[0];
+            Lapin trems = this.participer[0];
+
+            foreach (Lapin l in this.Participer)
             {
-                if (l.Position == 1)
+                if (l.Position > prems.Position)
                 {
-                    podium.Add(l);
-                    l.ToString();
-                }
-                if (l.Position == 2)
-                {
-                    podium.Add(l);
-                    l.ToString();
+                    prems = l;
                 }
 
-                if (l.Position == 3)
-                {
-                    podium.Add(l);
-                    l.ToString();
-                }
 
             }
+
+            podium.Add(prems);
+
+            foreach (Lapin l in this.Participer)
+            {
+                if (l.Position > deums.Position && l.Position < prems.Position)
+                {
+                    deums = l;
+                }
+
+
+            }
+            podium.Add(deums);
+            foreach (Lapin l in this.Participer)
+            {
+                if (l.Position > trems.Position && l.Position < deums.Position)
+                {
+                    trems = l;
+                }
+
+
+            }
+            podium.Add(trems);
+
             return podium;
         }
 
         public string Tostring()
         {
             string s;
-            s = string.Format("La course n{0] d'une distance {1}",this.id,this.distance);
+            s = string.Format("La course n{0} d'une distance {1}",this.id,this.distance);
             return s;
         }
+
+        
     }
 }

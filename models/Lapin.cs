@@ -11,7 +11,7 @@ namespace Utdl.Model {
         private int position;
         private int dossard;
         private int id;
-
+        
         static Lapin() {
             Lapin.comptage = 0;
             Lapin.increment = 1;
@@ -30,17 +30,28 @@ namespace Utdl.Model {
             set { Lapin.comptage = value; }
         }
 
-        public Lapin(string surnom, int age) {
+        public Lapin(string surnom, int age, State state) {
             this.surnom = surnom;
             this.age = age;
             this.position = 0;
             Lapin.aleatoire = new Random();
             this.dossard = Lapin.Comptage;
             Lapin.comptage = Lapin.comptage + Lapin.increment;
+            this.state = state;
         }
 
         public Lapin(int id, string surnom, int age, int dossard, int position, State state) {
             this.id = id;
+            this.surnom = surnom;
+            this.age = age;
+            this.dossard = dossard;
+            this.position = position;
+            this.state = state;
+        }
+
+        public Lapin( string surnom, int age, int dossard, int position, State state)
+        {
+            
             this.surnom = surnom;
             this.age = age;
             this.dossard = dossard;
@@ -67,7 +78,7 @@ namespace Utdl.Model {
 
 
         public void Avancer() {
-            this.position=this.position+Lapin.aleatoire.Next(1,6);
+            this.position=this.position+Lapin.aleatoire.Next(0,6);
         }
 
         public int Dossard {
@@ -85,7 +96,7 @@ namespace Utdl.Model {
             }
             set
             {
-                this.Id = value;
+                this.id = value;
             }
         }
 

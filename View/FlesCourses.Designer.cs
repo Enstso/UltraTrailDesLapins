@@ -33,60 +33,66 @@
             // lbCourses
             // 
             this.lbCourses.FormattingEnabled = true;
-            this.lbCourses.ItemHeight = 24;
-            this.lbCourses.Location = new System.Drawing.Point(12, 12);
+            this.lbCourses.Location = new System.Drawing.Point(7, 7);
+            this.lbCourses.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lbCourses.Name = "lbCourses";
-            this.lbCourses.Size = new System.Drawing.Size(425, 316);
+            this.lbCourses.Size = new System.Drawing.Size(234, 173);
             this.lbCourses.TabIndex = 0;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 348);
+            this.btnAdd.Location = new System.Drawing.Point(7, 189);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(98, 47);
+            this.btnAdd.Size = new System.Drawing.Size(53, 25);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(121, 348);
+            this.btnEdit.Location = new System.Drawing.Point(66, 189);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(98, 47);
+            this.btnEdit.Size = new System.Drawing.Size(53, 25);
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(230, 348);
+            this.btnDelete.Location = new System.Drawing.Point(125, 189);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(98, 47);
+            this.btnDelete.Size = new System.Drawing.Size(53, 25);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(339, 348);
+            this.btnSave.Location = new System.Drawing.Point(185, 189);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(98, 47);
+            this.btnSave.Size = new System.Drawing.Size(53, 25);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // FlesCourses
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 412);
+            this.ClientSize = new System.Drawing.Size(246, 223);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lbCourses);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FlesCourses";
             this.Text = "Les courses";
+            this.Load += new System.EventHandler(this.FlesCourses_Load);
             this.ResumeLayout(false);
 
         }
