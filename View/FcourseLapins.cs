@@ -22,17 +22,29 @@ namespace Utdl.View
             btnEdit.Click += this.btnEdit_Click;
             btnDelete.Click += this.btnDelete_Click;
             btnSave.Click += this.btnSave_Click;
+            cbCourse.SelectedIndexChanged += CbCourse_SelectedIndexChanged;
             DaoCourse course = new DaoCourse();
-            List<Course> courses = course.GetAll();
-            cbCourse.DataSource = courses;
-            cbCourse.ValueMember = "id";
-            cbCourse.DisplayMember = "id";
-            this.load(new DaoLapin().GetAll(cbCourse.SelectedIndex));
+            List<Course> courses = course.GetAllById();
+
+            foreach (Course c in courses)
+            {
+                this.cbCourse.Items.Add(c.Id);
+            }
+            
+            this.load(new DaoLapin().GetAll(1));
         }
 
-        private void btnSave_Click(object sender, System.EventArgs e)   
+        private void CbCourse_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
+            int id = cbCourse.SelectedIndex;
+            int cbId = (int)this.cbCourse.Items[id];
+            this.load(new DaoLapin().GetAll(cbId));
+        }
+
+        private void btnSave_Click(object sender, System.EventArgs e)
+        {
+
             List<Lapin> lapins = new List<Lapin>();
             foreach (object o in lbLesLapins.Items)
             {
@@ -62,7 +74,9 @@ namespace Utdl.View
 
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            FeditLapin fedit = new FeditLapin(State.added, lbLesLapins.Items, 0);
+            int id = cbCourse.SelectedIndex;
+            int cbId = (int)this.cbCourse.Items[id];
+            FeditLapin fedit = new FeditLapin(State.added, lbLesLapins.Items, cbId);
             fedit.Show();
         }
         private void load(List<Lapin> lapins)
@@ -76,14 +90,10 @@ namespace Utdl.View
 
         private void FcourseLapins_Load(object sender, EventArgs e)
         {
-            
+
 
         }
 
-        private void cbCourse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            
-        }
+       
     }
 }

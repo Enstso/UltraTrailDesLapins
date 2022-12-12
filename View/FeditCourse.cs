@@ -20,6 +20,8 @@ namespace Utdl.View {
                     break;
                 case State.modified:
                     this.Text="Modification d'une course";
+                    Course course = (Course)items[position];
+                    this.tbDistance.Text = course.Distance.ToString();
                     break;
                 case State.deleted:
                     this.Text="Suppression d'une course";
@@ -40,6 +42,7 @@ namespace Utdl.View {
                 case State.modified:
                     Course course = (Course)items[this.position];
                     course.Distance = Convert.ToInt32(this.tbDistance.Text);
+                    course.State = state;
                     items[this.position]=course;
                     break;
                 case State.deleted:

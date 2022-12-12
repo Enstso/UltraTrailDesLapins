@@ -39,7 +39,7 @@
             this.cbCourse.Name = "cbCourse";
             this.cbCourse.Size = new System.Drawing.Size(68, 21);
             this.cbCourse.TabIndex = 0;
-            this.cbCourse.SelectedIndexChanged += new System.EventHandler(this.cbCourse_SelectedIndexChanged);
+            this.cbCourse.SelectedIndexChanged += new System.EventHandler(this.CbCourse_SelectedIndexChanged);
             // 
             // lbLesLapins
             // 

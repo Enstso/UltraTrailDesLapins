@@ -13,13 +13,13 @@ namespace Utdl.View {
     public partial class FeditLapin:Form {
         State state;
         ListBox.ObjectCollection items;
-        int position;
-        public FeditLapin(State state, ListBox.ObjectCollection items,int position) {
+        int id;
+        public FeditLapin(State state, ListBox.ObjectCollection items,int id) {
             InitializeComponent();
             btnValider.Click += this.btnValider_Click;
             this.state = state;
             this.items = items;
-            this.position = position;
+            this.id = id;
             
             switch (state)
             {
@@ -28,6 +28,10 @@ namespace Utdl.View {
                     break;
                 case State.modified:
                     this.Text = "Modification d'un lapin";
+                    this.tbSurnom.Text = ((Lapin)items[id]).Surnom;
+                    this.tbAge.Text = ((Lapin)items[id]).Age.ToString();
+                    this.tbDossard.Text = ((Lapin)items[id]).Dossard.ToString();
+                    this.tbPosition.Text = ((Lapin)items[id]).Position.ToString();
                     break;
                 case State.deleted:
                     this.Text = "Suppression d'un lapin";
@@ -45,14 +49,15 @@ namespace Utdl.View {
             switch (this.state)
             {
                 case State.added:
-                    items.Add(new Lapin(tbSurnom.Text, Convert.ToInt32(tbAge.Text), this.state));
+                    items.Add(new Lapin(tbSurnom.Text, Convert.ToInt32(tbAge.Text),id, this.state));
+                    this.Close();
                     break;
                 case State.modified:
-                    Lapin lapin = (Lapin)items[this.position];
-                    
+                    Lapin lapin = (Lapin)items[this.id];
+                    lapin.State = state;
                     lapin.Surnom = this.tbSurnom.Text;
                     lapin.Age = Convert.ToInt32(this.tbAge.Text);
-                    
+                    this.Close();
                     break;
                 case State.deleted:
                     break;
