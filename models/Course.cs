@@ -170,7 +170,7 @@ namespace Utdl.Model {
             return podium;
         }
 
-        public string Tostring()
+        public override string ToString()
         {
             string s;
             s = string.Format("La course n{0} d'une distance {1}",this.id,this.distance);

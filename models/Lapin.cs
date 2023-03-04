@@ -135,7 +135,7 @@ namespace Utdl.Model
             set { this.dossard = value; }
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return string.Format("Un lapin nommé {0} agé de {1} ans et dont la position est {2} dossard n° {3} de la course {4}", this.surnom, this.age, this.position, this.dossard, this.idCourse);
         }

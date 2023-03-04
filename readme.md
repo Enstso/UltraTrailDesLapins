@@ -1,12 +1,53 @@
-# Ajout de l'accès aux données à des classes métiers 
+# UltraTraildesLapins 
 
-## 1. Mise en place des classes
+Contexte : Pour la préparation des courses des lapins une application sera créer pour la gestion. 
+## 1. Architecture du projet
 
 * model : représente les classes métiers, la logique métier de la programmation
 * dao : permet d'organiser la persistance des données dans une base de données. D'autres
 choix techniques auraient pu être envisagés (fichier texte, json, csv...)
-* view : les vues représentent l'interface utilisateur de l'application. Elles sont réalisées
+* view : les vues représentent l'interface organisateur de l'application. Elles sont réalisées
 en fonction des maquettes écrans proposées ainsi que des cas d'utilisation retenus.
+
+L'architecture du projet est le MVC :
+
+Model-View-Controller.
+
+![mvc.png](img/mvc.png)
+
+Base de données :
+
+```Sql
+drop database if exists dbUtdl;
+create database dbUtdl;
+
+use dbUtdl;
+
+create table Course (
+    id int(11) unsigned not null auto_increment,
+    distance int(11) unsigned not null,
+    index(id)  
+);
+
+create table Lapin (
+    id int not null auto_increment,
+    surnom varchar(20) not null,
+    position int(11) unsigned,
+    dossard int(11) unsigned,
+    age int(11) unsigned not null,
+    idCourse int(11) unsigned not null,
+    index(id)
+);
+
+alter table Course add constraint pk_Course primary key (id);
+alter table Lapin add constraint pk_Lapin primary key (id);
+alter table Lapin add constraint fk_Lapin_Participer_Course foreign key (idCourse) references Course(id);
+alter table Lapin add index idx_idCourse (idCourse);
+
+```
+
+Cas d'utilisation :
+
 
 ```plantuml
 @startuml cas d'utilisation
@@ -22,230 +63,80 @@ rectangle UltraTrail {
     (Inscrire des Lapins à une course)<..(Supprimer une inscription):<<extends>>    
 }
 note top of (Inscrire des Lapins à une course)
-  1. l'utilisateur sélectionne une course
+  1. l'organisateur sélectionne une course
   2. la liste des lapins participants est affichée
   
   <u>scénarios inclus</u>
-  l'utilisateur peut ajouter un participant
-  l'utilisateur peut supprimer un participant
-  l'utilisateur peut modifier un participant
+  l'organisateur peut ajouter un participant
+  l'organisateur peut supprimer un participant
+  l'organisateur peut modifier un participant
   
-  3. l'utilisateur Valide ses modifications
+  3. l'organisateur Valide ses modifications
 end note
 @enduml
 ```
 
-Le modèle est à récupérer des tp précédents, les classes du dao sont à coder. On vous fournit un exemple pour DaoCourse, DaoLapin est à coder. Le code de la classe de connection vous est fourni.
-Pour les vues, vous avez un exemple permettant de gérer entièrement les vues de `Course`. Les vues sur la classe `Lapin` sont à coder.
-Toutes les maquettes écran vous sont fournies.
 
-Les projets Model et Dao doivent être compilés sous forme de dll. Les références doivent être ajoutées dans la vue.
 
-<div style="page-break-after: always;"></div>
 
-## 2. Adapter le modèle métier :
-
-![modèle métier](./img/cd/modeleCd.png)
-
-Ajouter les propriétés et méthodes suivantes dans chaque classe métier
-* id {get;set}
-* state {get;set}
-* Remove()
-* prévoir une méthode ToString affichant les informations sur une seule ligne. Pensez à afficher l'état de l'occurence
-* Modifier le constructeur de lapin et course pour respecter les signatures proposées.
-* un script de création de la base de données vous est proposé dans le répertoir bd `[script bd](./bd/CreateDbUtdl.sql)`
-
-```csharp
-public void Remove() {
-    this.state = State.deleted;
-}
-```
-
-Prévoir une énumération
-Celle-ci permet de qualifier l'état d'une instance, en lien avec la couche Dao.
+Prévoir une énumération permet de qualifier l'état d'une instance, en lien avec la couche Dao.
 
 ```csharp
 public enum State { added, modified, deleted, unChanged };
 ```
 
-<div style="page-break-after: always;"></div>
+## 2. L'application
 
-## 3. Classes d'accès aux données
+La fenêtre principale : 
 
-Permet de définir une couche (logiciel) d'accès aux données. Elle permet de rendre indépendant la couche métier de la couche de persitance.
+![f1.PNG](img/f1.PNG)
 
-### Dao Connection
+Le boutton une course nous permet de gérer les courses :
 
-Permet la connexion à n'importe quelle base de données. C'est une classe static, son accesseur GetMySqlConnection garantit qu'il n'existera qu'une seule instance de connexion à la base de données.
+![f2.PNG](img/f2.PNG)
 
-![cd DaoConnectionSingleton](./img/cd/daoConnectionSingleton.png)
+Nous pouvons créer, modifier, supprimer et voir les courses.
 
-### Dao Course
+Création d'une course en appuyant sur le bouton add :
 
-![cd DaoConnectionSingleton](./img/cd/daoCourse.png)
+![f3.PNG](img/f3.PNG)
 
-## 4. Vues sur les courses
+La course a bien été créée :
 
-### La liste des courses
+![f4.PNG](img/f4.PNG)
 
-> voici le code permettant d'afficher la liste des courses en utilisant le dao sur les courses.
+Modification de la course numéro 1 en lui ajoutant une dsitance de 1000 m :
 
-![maquette FCourses](./img/maq/FLesCourses.png)
+![f5.PNG](img/f5.PNG)
 
-On met en place ce que l'on nomme crud :
-- create
-- read 
-- update
-- delete 
-Généralement on s'oblige à créer un crud sur toutes les tables gérées en base de données. De manière à donner accès au maitre d'ouvrage à toutes les données gérées par le système développé.
+Résultat :
 
-```csharp
-public partial class FlesCourses:Form {
-    public FlesCourses() {
-        InitializeComponent();
-        btnAdd.Click += this.btnAdd_Click;
-        btnEdit.Click += this.btnEdit_Click;
-        btnDelete.Click += this.btnDelete_Click;
-        btnSave.Click += this.btnSave_Click;
-        this.load(new DaoCourse().GetAll());
-    }
+![f6.PNG](img/f6.PNG)
 
-    private void btnSave_Click(object sender,System.EventArgs e) {
-        List<Course> courses = new List<Course>();
-        foreach(object o in lbCourses.Items) {
-            courses.Add((Course)o);
-        }
-        new DaoCourse().SaveChanges(courses);
-        this.load(courses);            
-    }
-```
+Revenons sur notre menu principal cliquons sur LesCourses :
 
-<div style="page-break-after: always;"></div>
+![f1.PNG](img/f1.PNG)
 
-```csharp
-    private void btnDelete_Click(object sender,System.EventArgs e) {
-        if(lbCourses.SelectedIndex == -1) return;
-        int position = lbCourses.SelectedIndex;
-        ((Course)lbCourses.Items[position]).Remove();
-        lbCourses.Items[position] = lbCourses.Items[position];
-    }
+Le boutton LesCourses permet de gérer les lapins qui participent aux courses.
 
-    private void btnEdit_Click(object sender,System.EventArgs e) {
-        if(lbCourses.SelectedIndex == -1) return;
-        int position = lbCourses.SelectedIndex;
-        FeditCourse fEdit = new FeditCourse(State.modified,lbCourses.Items,position);
-        fEdit.Show();
-    }
+Nous avions précédemment créée une course nous la retrouvons dans cette fenêtre nous pouvons voir aucun particpant pour le moment :
 
-    private void btnAdd_Click(object sender,System.EventArgs e) {
-        FeditCourse fEdit = new FeditCourse(State.added,lbCourses.Items,0);
-        fEdit.Show();
-    }
 
-    private void load(List<Course> courses) {
-        lbCourses.Items.Clear();
-        foreach(Course c in courses) {
-            lbCourses.Items.Add(c);
-        }
-    }
-}
-```
+![f7.PNG](img/f7.PNG)
 
-### La fenêtre permettant de créer/modifier une course
+Nous allons créer 2 participants Jeanmi & Billy pour la course numéro 1:
 
-![maquette FCourses](./img/maq/FEditCourse.png)
+![f8.PNG](img/f8.PNG)
 
-<div style="page-break-after: always;"></div>
+Pour une visualisation de l'application nous créons une nouvelle course de 800 m:
 
-```csharp
-public partial class FeditCourse:Form {
-    State state;
-    ListBox.ObjectCollection items;
-    int position;
+![f9.PNG](img/f9.PNG)
 
-public FeditCourse(State state,ListBox.ObjectCollection items,int position) {
-    InitializeComponent();
-    btnValider.Click += this.btnValider_Click;
-    this.state = state;
-    this.items = items;
-    this.position = position;
-    switch(state) {
-        case State.added:
-            this.Text = "Création d'une course";
-            break;
-        case State.modified:
-            Course course = (Course)items[position];
-            this.tbId.Text = course.Id.ToString();
-            this.tbDistance.Text = course.Distance.ToString();
-            this.Text = "Modification d'une course";
-            break;
-        case State.deleted:
-            this.Text = "Suppression d'une course";
-            break;
-        case State.unChanged:
-            this.Text = "Consultation d'une course";
-            break;
-        default:
-            break;
-    }
-}
-```
+pour cette nouvelle course nous avons créer des nouveaux participants :
 
- <div style="page-break-after: always;"></div>
+![f10.PNG](img/f10.PNG)
 
- ```csharp
- private void btnValider_Click(object sender,EventArgs e) {
-    switch(this.state) {
-        case State.added:
-            items.Add(new Course(0,Convert.ToInt32(this.tbDistance.Text),this.state));
-            break;
-        case State.modified:
-            Course course = (Course)items[this.position];
-            course.Distance = Convert.ToInt32(this.tbDistance.Text);
-            course.State = this.state;
-            items[this.position] = course;
-            break;
-        case State.deleted:
-            break;
-        case State.unChanged:
-            // rien
-            break;
-        default:
-            break;
-    }
-    this.Close();
-    }
-}
-```
+### Évolution :
 
-> à vous de coder pour la classe lapin : 
+Une potentiel évolution pourra être faîtes, un jeu de paris de course sur les lapins avec une visualisation de la course en direct.
 
-- le modèle objet d'accès aux données,
-- La liste des lapins participants à une course,
-- La modification/Création d'une participation.
-
-## 5. Dao Lapin
-
-![maquette FCourses](./img/cd/daoLapin.png)
-
-- attention à la méthode `GetAll(..)` qui attend dans ce cas un paramètre.
-
-<div style="page-break-after: always;"></div>
-
-## 6. Vues sur la class Lapin 
-
-### La liste des lapins participants à une course
-
-![maquette FCourses](./img/maq/FCourseLapin.png)
-
-### La modification/Création d'une participation
-
-![maquette FCourses](./img/maq/FEditLapin.png) 
-
-## 7. Gérer la génération de l'id dans la base de données
-
-Vous avez peut être remarqué que lorsque l'on crée une nouvelle course ou un nouveau lapin, on ne récupère pas l'id de celui-ci. 
-
-Proposez une évolution permettant de résoudre ce petit problème.
-
-indice 1 : l'évolution est liée à une propriété du SqlCommand (LastInsertId) que l'on peut utiliser lors que l'on effectue un Insert.
