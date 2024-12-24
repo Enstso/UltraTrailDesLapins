@@ -1,21 +1,18 @@
 # UltraTraildesLapins 
 
-Contexte : Pour la préparation des courses des lapins une application sera créer pour la gestion. 
-## 1. Architecture du projet
+Contexte : For preparing the rabbits' shopping list, an application will be created for management.
 
-* model : représente les classes métiers, la logique métier de la programmation
-* dao : permet d'organiser la persistance des données dans une base de données. D'autres
-choix techniques auraient pu être envisagés (fichier texte, json, csv...)
-* view : les vues représentent l'interface organisateur de l'application. Elles sont réalisées
-en fonction des maquettes écrans proposées ainsi que des cas d'utilisation retenus.
+## 1. Project Architecture
 
-L'architecture du projet est le MVC :
+* model : Represents the business logic and the core programming logic.
+* dao : Handles the organization of data persistence in a database. Other technical choices, such as text files, JSON, or CSV, could have been considered.
+* view : The views represent the application's user interface. They are created based on the proposed screen mockups and selected use cases.
 
-Model-View-Controller.
+The project architecture follows the MVC: Model-View-Controller.
 
 ![mvc.png](img/mvc.png)
 
-Base de données :
+Database :
 
 ```Sql
 drop database if exists dbUtdl;
@@ -46,7 +43,7 @@ alter table Lapin add index idx_idCourse (idCourse);
 
 ```
 
-Cas d'utilisation :
+Use Case :
 
 
 ```plantuml
@@ -79,64 +76,63 @@ end note
 
 
 
-Prévoir une énumération permet de qualifier l'état d'une instance, en lien avec la couche Dao.
+Consider implementing an enumeration to define the state of an instance, in relation to the DAO layer.
 
 ```csharp
 public enum State { added, modified, deleted, unChanged };
 ```
 
-## 2. L'application
+## 2. application
 
-La fenêtre principale : 
+Main Window : 
 
 ![f1.PNG](img/f1.PNG)
 
-Le boutton une course nous permet de gérer les courses :
+The "Une Course" button allows us to manage the races :
 
 ![f2.PNG](img/f2.PNG)
 
-Nous pouvons créer, modifier, supprimer et voir les courses.
+We can create, modify, delete, and view races.
 
-Création d'une course en appuyant sur le bouton add :
+Creating a Race by Clicking the Add Button :
 
 ![f3.PNG](img/f3.PNG)
 
-La course a bien été créée :
+The race has been successfully created :
 
 ![f4.PNG](img/f4.PNG)
 
-Modification de la course numéro 1 en lui ajoutant une dsitance de 1000 m :
+Modifying Race Number 1 by Adding a Distance of 1000m :
 
 ![f5.PNG](img/f5.PNG)
 
-Résultat :
+Result :
 
 ![f6.PNG](img/f6.PNG)
 
-Revenons sur notre menu principal cliquons sur LesCourses :
+Back on the main menu, click on "Les Courses" :
 
 ![f1.PNG](img/f1.PNG)
 
-Le boutton LesCourses permet de gérer les lapins qui participent aux courses.
+The "Les Courses" button allows us to manage the rabbits participating in the races.
 
-Nous avions précédemment créée une course nous la retrouvons dans cette fenêtre nous pouvons voir aucun particpant pour le moment :
+We previously created a race, which can now be seen in this window, and there are currently no participants :
 
 
 ![f7.PNG](img/f7.PNG)
 
-Nous allons créer 2 participants Jeanmi & Billy pour la course numéro 1:
+We will now create two participants, Jeanmi & Billy, for race number 1 :
 
 ![f8.PNG](img/f8.PNG)
 
-Pour une visualisation de l'application nous créons une nouvelle course de 800 m:
+For a better visualization of the app, we create a new race of 800 m :
 
 ![f9.PNG](img/f9.PNG)
 
-pour cette nouvelle course nous avons créer des nouveaux participants :
+For this new race, we have created new participants :
 
 ![f10.PNG](img/f10.PNG)
 
-### Évolution :
+### Future Evolution :
 
-Une potentiel évolution pourra être faîtes, un jeu de paris de course sur les lapins avec une visualisation de la course en direct.
-
+A potential evolution could be the addition of a betting game for the rabbit races, along with live race visualization.
